@@ -1,0 +1,19 @@
+{
+	"NODE_ENV": "staging",
+	"webpack": "../webpack.staging.config.js",
+	"output": "staging",
+	"siteURL": "",
+	"assetsURL": "",
+	"endpointURL": "",
+	"robotsMeta": "noindex",
+
+	"s3Region": "",
+	"s3Bucket": "",
+	"s3AccessKey": "",
+	"s3SecretKey": "",
+
+	"ftpHost": "",
+	"ftpUser": "",
+	"ftpPassword": "",
+	"ftpParallel": 10
+}

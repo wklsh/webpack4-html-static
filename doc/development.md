@@ -1,0 +1,4 @@
+- setting up
+- coding styles and formatting
+- helper functions
+- persist

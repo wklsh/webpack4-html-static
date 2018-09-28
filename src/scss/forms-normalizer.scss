@@ -1,0 +1,37 @@
+@import "~StyleAlias/mixins";
+
+// Form normalizer
+.form-control:focus {
+	box-shadow: none;
+}
+
+.was-validated .form-control:valid {
+	border-color: #cccccc;
+}
+
+.was-validated .form-control:valid:focus {
+	border-color: initial;
+	box-shadow: none;
+}
+
+// Globals
+.fixedDropdownErrorMsg,
+.invalid-feedback {
+	width: 100%;
+
+	font-size: 80%;
+	color: #dc3545;
+
+	margin-top: 0.5em;
+}
+
+.is--error {
+	&.formElements__date,
+	&.formElements__dropdown {
+		border-color: #dc3545 !important;
+	}
+	.formElements__checkbox_customCheckbox,
+	.formElements__radio_customRadio {
+		border: 1px solid #dc3545 !important;
+	}
+}
