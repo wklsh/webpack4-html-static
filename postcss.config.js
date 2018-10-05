@@ -5,7 +5,8 @@ module.exports = {
 		"css-mqpacker": {},
 
 		autoprefixer: {
-			browsers: ["defaults"]
+			grid: true,
+			browsers: [">1%"]
 		},
 		cssnano: {
 			zindex: false,
