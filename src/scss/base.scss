@@ -15,6 +15,7 @@ html {
 	overflow-x: hidden;
 	overflow-y: auto;
 	-ms-overflow-style: scrollbar;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
 	&.disable-scroll {
 		overflow-y: hidden;
