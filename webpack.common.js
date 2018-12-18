@@ -71,6 +71,7 @@ module.exports = {
 			// { from: "./src/index.php", to: "index.php" },
 			// { from: "./src/meta.json", to: "meta.json" },
 			// { from: "./src/seo.php", to: "seo.php" },
+			{ from: "./src/favicon.ico", to: "favicon.ico" },
 			{ from: "./src/.htaccess", to: ".htaccess", toType: "file" },
 			{ from: "./src/robots.txt", to: "robots.txt" }
 		])
