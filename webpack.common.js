@@ -12,7 +12,7 @@ const PreloadWebpackPlugin = require("preload-webpack-plugin");
 
 module.exports = {
 	entry: {
-		app: path.resolve(__dirname, "src/app/index.js")
+		app: path.resolve(__dirname, "src/js/index.js")
 	},
 
 	module: {
@@ -71,10 +71,11 @@ module.exports = {
 		extensions: [".css", ".scss", ".js", ".jsx"],
 		alias: {
 			AppAlias: path.resolve(__dirname, "src/app"),
-			BaseAlias: path.resolve(__dirname, "src/app/base"),
-			StyleAlias: path.resolve(__dirname, "src/app/base/styles"),
-			ComponentsAlias: path.resolve(__dirname, "src/app/components"),
-			ReduxAlias: path.resolve(__dirname, "src/app/redux"),
+			JsAlias: path.resolve(__dirname, "src/js"),
+			BaseAlias: path.resolve(__dirname, "src/base"),
+			StyleAlias: path.resolve(__dirname, "src/scss"),
+			ComponentsAlias: path.resolve(__dirname, "src/components"),
+			ReduxAlias: path.resolve(__dirname, "src/redux"),
 			ImgAlias: path.resolve(__dirname, "src/img"),
 			AudioAlias: path.resolve(__dirname, "src/audio")
 		}
