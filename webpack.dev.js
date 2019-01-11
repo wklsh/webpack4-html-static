@@ -28,7 +28,8 @@ module.exports = merge(common, {
 		port: 3000,
 		headers: {
 			"Access-Control-Allow-Origin": "*"
-		}
+		},
+		hot: true
 	},
 
 	module: {
@@ -66,7 +67,7 @@ module.exports = merge(common, {
 			}
 		]
 	},
-	
+
 	plugins: [
 		// HOT Module
 		new webpack.HotModuleReplacementPlugin()
