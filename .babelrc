@@ -1,21 +1,7 @@
 {
 	presets: ["es2015", "stage-0", "react"],
 
-	plugins: [
-		[
-			"react-css-modules",
-			{
-				filetypes: {
-					".scss": {
-						syntax: "postcss-scss"
-					}
-				},
-				context: "src",
-				exclude: "node_modules",
-				webpackHotModuleReloading: true
-			}
-		]
-	],
+	plugins: [],
 
 	env: {
 		build: {
