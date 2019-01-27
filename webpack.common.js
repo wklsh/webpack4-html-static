@@ -9,10 +9,13 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const WebpackBar = require("webpackbar");
 const PreloadWebpackPlugin = require("preload-webpack-plugin");
+const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
+const HtmlWebpackImportStaticPages = require("html-webpack-import-static-pages");
 
 module.exports = {
 	entry: {
-		app: path.resolve(__dirname, "src/js/index.js")
+		app: path.resolve(__dirname, "src/js/index.js"),
+		landing: path.resolve(__dirname, "src/js/views/landing/page-landing.js")
 	},
 
 	module: {
@@ -82,6 +85,12 @@ module.exports = {
 	},
 
 	plugins: [
+		new FriendlyErrorsWebpackPlugin({
+			compilationSuccessInfo: {
+				messages: ["Application is running.", "http://localhost:3000"]
+			}
+		}),
+
 		new WebpackBar(),
 
 		new HtmlWebPackPlugin({
@@ -89,6 +98,13 @@ module.exports = {
 			filename: "./index.html",
 			inject: "body",
 			chunksSortMode: "none"
+		}),
+
+		new HtmlWebpackImportStaticPages({
+			// blacklist: ["page2"],
+			chunkAssign: {
+				index: ["app", "landing"]
+			}
 		}),
 
 		new PreloadWebpackPlugin({
@@ -108,15 +124,6 @@ module.exports = {
 
 			// Remove from preload list - since theres already a preloader
 			fileBlacklist: [/\.(gif|png|jpe?g|svg)/]
-		}),
-
-		new CopyWebpackPlugin([
-			// { from: "./src/index.php", to: "index.php" },
-			// { from: "./src/meta.json", to: "meta.json" },
-			// { from: "./src/seo.php", to: "seo.php" },
-			{ from: "./src/favicon.ico", to: "favicon.ico" },
-			{ from: "./src/.htaccess", to: ".htaccess", toType: "file" },
-			{ from: "./src/robots.txt", to: "robots.txt" }
-		])
+		})
 	]
 };
