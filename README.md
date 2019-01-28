@@ -26,7 +26,7 @@ npm run build
 
 `src` - Where the working files are
 
-`dist` - Contains the production build, **you do not edit the files here**
+`dist` - Contains the production build, **do not edit the files here**
 
 ###### Webpack config structure
 
