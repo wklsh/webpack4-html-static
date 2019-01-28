@@ -10,7 +10,6 @@
 ### Dependencies
 
 - Built with [Webpack 4](https://github.com/webpack/webpack)
-- ~~Tasks ran with [Gulp](https://github.com/gulpjs/gulp)~~
 - Platform under [Node.js](https://nodejs.org/)
 
 ### Quick start
