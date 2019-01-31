@@ -73,14 +73,7 @@ module.exports = {
 	resolve: {
 		extensions: [".css", ".scss", ".js", ".jsx"],
 		alias: {
-			AppAlias: path.resolve(__dirname, "src/app"),
 			JsAlias: path.resolve(__dirname, "src/js"),
-			BaseAlias: path.resolve(__dirname, "src/base"),
-			StyleAlias: path.resolve(__dirname, "src/scss"),
-			ComponentsAlias: path.resolve(__dirname, "src/components"),
-			ReduxAlias: path.resolve(__dirname, "src/redux"),
-			ImgAlias: path.resolve(__dirname, "src/img"),
-			AudioAlias: path.resolve(__dirname, "src/audio")
 		}
 	},
 
