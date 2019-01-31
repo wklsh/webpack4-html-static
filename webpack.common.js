@@ -74,6 +74,8 @@ module.exports = {
 		extensions: [".css", ".scss", ".js", ".jsx"],
 		alias: {
 			JsAlias: path.resolve(__dirname, "src/js"),
+			StyleAlias: path.resolve(__dirname, "src/scss"),
+			ImgAlias: path.resolve(__dirname, "src/img")
 		}
 	},
 
