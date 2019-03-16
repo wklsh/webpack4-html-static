@@ -69,12 +69,7 @@ module.exports = merge(common, {
 				test: /\.js[x]?$/,
 				enforce: "pre",
 				exclude: /node_modules/,
-				loader: "eslint-loader",
-				options: {
-					formatter: require("eslint-formatter-pretty"),
-					emitError: true,
-					emitWarning: true
-				}
+				loader: "eslint-loader"
 			}
 		]
 	},
