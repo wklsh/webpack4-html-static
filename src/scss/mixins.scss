@@ -4,79 +4,70 @@
  USAGE:
  @include font-face(Samplino, fonts/Samplino);
  --------------------------------------------------------------------------------------*/
- @mixin font-face($name, $path, $weight: null, $style: null, $exts: eot ttf woff woff2 ) {
- 	$src: null;
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot ttf woff woff2) {
+	$src: null;
 
- 	$extmods: (
- 		eot: "?",
- 		svg: "#" + str-replace($name, " ", "_")
- 		);
+	$extmods: (
+		eot: "?",
+		svg: "#" + str-replace($name, " ", "_"),
+	);
 
- 	$formats: (
- 		otf: "opentype",
- 		ttf: "truetype"
- 		);
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype",
+	);
 
- 	@each $ext in $exts {
- 		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
- 		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
- 		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
- 	}
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
 
- 	@font-face {
- 		font-family: quote($name);
- 		font-style: $style;
- 		font-weight: $weight;
- 		src: $src;
- 	}
- }
-
-
-
-
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
 
 /*--------------------------------------------------------------------------------------
  Google Webfont - weights
 
- USAGE: 
+ USAGE:
  div {
 	@include font-weight(thin); *use value from photoshop*
  }
  --------------------------------------------------------------------------------------*/
- @mixin font-weight($weight) {
- 	$weights: (
- 		thin: 100,
- 		extra-light: 200,
- 		ultra-light: 200,
- 		light: 300,
- 		normal: 400,
- 		book: 400,
- 		regular: 400,
- 		medium: 500,
- 		semi-bold: 600,
- 		demi-bold: 600,
- 		bold: 700,
- 		extra-bold: 800,
- 		ultra-bold: 900,
- 		heavy: 900,
- 		black: 900,
- 		ultra: 900,
- 		ultra-black: 900,
- 		extra-ultra: 900
- 		);
+@mixin font-weight($weight) {
+	$weights: (
+		thin: 100,
+		extra-light: 200,
+		ultra-light: 200,
+		light: 300,
+		normal: 400,
+		book: 400,
+		regular: 400,
+		medium: 500,
+		semi-bold: 600,
+		demi-bold: 600,
+		bold: 700,
+		extra-bold: 800,
+		ultra-bold: 900,
+		heavy: 900,
+		black: 900,
+		ultra: 900,
+		ultra-black: 900,
+		extra-ultra: 900,
+	);
 
- 	$output: $weight;
- 	@if map-has-key($weights, $weight) {
- 		$output: map-get($weights, $weight);
- 	}
+	$output: $weight;
+	@if map-has-key($weights, $weight) {
+		$output: map-get($weights, $weight);
+	}
 
- 	font-weight: $output;
- }
-
-
-
-
-
+	font-weight: $output;
+}
 
 /*--------------------------------------------------------------------------------------
  Breakpoint
@@ -85,27 +76,33 @@
  @include breakpoint(mobile) {
  }
  --------------------------------------------------------------------------------------*/
- @mixin breakpoint($class) {
- 	@if $class == mobile {
- 		@media (max-width: 500px) { @content; }
- 	}
- 	@if $class == tablet-verti {
- 		@media (min-width: 501px) and (max-width: 769px) { @content; }
- 	}
- 	@if $class == tablet-hori {
- 		@media (min-width:770px) and (max-width: 1199px) { @content; }
- 	}
- 	@if $class == desktop {
- 		@media (min-width: 1200px) { @content; }
- 	}
- 	@if $class == xlarge {
- 		@media (min-width: 1600px) { @content; }
- 	}
- }
-
-
-
-
+@mixin breakpoint($class) {
+	@if $class == mobile {
+		@media (max-width: 500px) {
+			@content;
+		}
+	}
+	@if $class == tablet-verti {
+		@media (min-width: 501px) and (max-width: 769px) {
+			@content;
+		}
+	}
+	@if $class == tablet-hori {
+		@media (min-width: 770px) and (max-width: 1199px) {
+			@content;
+		}
+	}
+	@if $class == desktop {
+		@media (min-width: 1200px) {
+			@content;
+		}
+	}
+	@if $class == xlarge {
+		@media (min-width: 1600px) {
+			@content;
+		}
+	}
+}
 
 /*--------------------------------------------------------------------------------------
  Letter-spacing
@@ -116,14 +113,10 @@
 	*use value from photoshop*
  }
  --------------------------------------------------------------------------------------*/
- @mixin get-spacing($tracking) {
- 	$tracking: ( $tracking / 1000 ) * 1em;
- 	letter-spacing: $tracking;
- }
-
-
-
-
+@mixin get-spacing($tracking) {
+	$tracking: ($tracking / 1000) * 1em;
+	letter-spacing: $tracking;
+}
 
 /*--------------------------------------------------------------------------------------
  Retina image
@@ -134,16 +127,16 @@
 	@include retinaImg("logo2x.png", 100px, 25px);
  }
  --------------------------------------------------------------------------------------*/
- @mixin retinaImg($image, $width: null, $height: null) {
- 	@media (min--moz-device-pixel-ratio: 1.3),
- 	(-o-min-device-pixel-ratio: 2.6/2),
- 	(-webkit-min-device-pixel-ratio: 1.3),
- 	(min-device-pixel-ratio: 1.3),
- 	(min-resolution: 1.3dppx) {
-    // On retina, use image that's scaled by 2
-    background-image: url($image);
+@mixin retinaImg($image, $width: null, $height: null) {
+	@media (min--moz-device-pixel-ratio: 1.3),
+		(-o-min-device-pixel-ratio: 2.6/2),
+		(-webkit-min-device-pixel-ratio: 1.3),
+		(min-device-pixel-ratio: 1.3),
+		(min-resolution: 1.3dppx) {
+		// On retina, use image that's scaled by 2
+		background-image: url($image);
 
-    // Only apply width and height if specified
-    background-size: $width $height;
-  }
+		// Only apply width and height if specified
+		background-size: $width $height;
+	}
 }

@@ -1,2 +1,3 @@
-import "StyleAlias/index.scss";
+import "../scss/index.scss";
+
 console.log("index.js");

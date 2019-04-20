@@ -1,7 +1,7 @@
 //modular and reusable rules
 //meant to be used on multiple elements throughout the app
 @charset 'utf-8';
-@import "~StyleAlias/colors";
+@import "../scss/colors.scss";
 
 .no-select {
 	user-select: none;
@@ -48,10 +48,9 @@
 	&--dNone {
 		display: none !important;
 	}
-	
+
 	&--hidden {
 		visibility: hidden;
-
 	}
 }
 

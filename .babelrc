@@ -1,11 +1,12 @@
 {
-	presets: ["es2015", "stage-0", "react"],
-
-	plugins: [],
-
-	env: {
-		build: {
-			optional: ["optimisation", "minification"]
-		}
-	}
+	"presets": [
+		[
+			"@babel/preset-env",
+			{
+				"useBuiltIns": "usage",
+				"corejs": "2"
+			}
+		]
+	],
+	"plugins": ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-proposal-class-properties"]
 }

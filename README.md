@@ -1,41 +1,34 @@
 # Static HTML webpack boilerplate
 
-### Features
+## Features
 
 - Webpack 4
 - ES 6
 - JS/CSS chunking
 - Dynamic Static HTML imports for HtmlWebPackPlugin
 
-### Dependencies
+## Start DEV environment
 
-- Built with [Webpack 4](https://github.com/webpack/webpack)
-- Platform under [Node.js](https://nodejs.org/)
-
-### Quick start
-
-Clone and install in your local directory.
-
+```javascript
+npm run start
 ```
-git clone REPO-URL
-npm i
+
+## Build Production Version
+
+```javascript
 npm run build
 ```
 
-## Structure of the project
+## Project Structure
 
 `src` - Where the working files are
 
 `dist` - Contains the production build, **do not edit the files here**
 
-###### Webpack config structure
+## Webpack config structure
 
 `webpack.common.js` - Contains all core essential configurations that are needed in both **dev** and **prod** environments
 
 `webpack.dev.js` - Merges with `webpack.common.js` and and only contains configurations for **dev** environment
 
 `webpack.prod.js` - Merges with `webpack.common.js` and and only contains configurations for **production** environment
-
-## TO-DO's
-
-- [ ] Server deployment
