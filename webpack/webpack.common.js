@@ -1,4 +1,5 @@
 const Path = require("path");
+const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackImportStaticPages = require("html-webpack-import-static-pages");
 
@@ -47,6 +48,7 @@ module.exports = {
 							process.env.NODE_ENV == "development"
 								? "[path][name].[ext]"
 								: "assets/[sha512:hash:base64:7].[ext]",
+						publicPath: "../",
 					},
 				},
 			},
@@ -56,7 +58,7 @@ module.exports = {
 	resolve: {
 		extensions: [".css", ".scss", ".js", ".jsx"],
 		alias: {
-			"~": Path.resolve(__dirname, "../src"),
+			Src: Path.resolve(__dirname, "../src"),
 		},
 	},
 
@@ -66,6 +68,11 @@ module.exports = {
 				index: ["app"],
 			},
 		}),
+
+		// new webpack.ProvidePlugin({
+		// 	$: "jquery",
+		// 	jQuery: "jquery",
+		// }),
 
 		// new CopyWebpackPlugin([{ from: Path.resolve(__dirname, "../public"), to: "public" }]),
 	],
