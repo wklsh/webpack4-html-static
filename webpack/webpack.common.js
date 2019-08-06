@@ -1,31 +1,106 @@
-const Path = require("path");
+const path = require("path");
 const webpack = require("webpack");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const HtmlWebpackImportStaticPages = require("html-webpack-import-static-pages");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+const PreloadWebpackPlugin = require("preload-webpack-plugin");
 
 module.exports = {
+	mode: "development",
+
 	entry: {
-		app: Path.resolve(__dirname, "../src/js/index.js"),
+		base: "./src/index.js",
 	},
 
 	output: {
-		path: Path.join(__dirname, "../build"),
-		filename: "js/[name].js",
-	},
-
-	optimization: {
-		splitChunks: {
-			chunks: "all",
-			name: false,
-		},
+		filename: "js/bundle.js",
+		path: path.resolve(__dirname, "../dist"),
 	},
 
 	module: {
 		rules: [
 			{
+				test: /\.txt$/,
+				use: "raw-loader",
+			},
+			{
+				test: /\.html$/,
+				use: [
+					{
+						loader: "html-loader",
+						options: {
+							minimize: true,
+						},
+					},
+				],
+			},
+			{
+				test: /\.(jpe?g|png|gif|svg)$/,
+				use: [
+					{
+						loader: "file-loader",
+						options: {
+							name:
+								process.env.NODE_ENV !== "production"
+									? "[path][name].[ext]"
+									: "[sha512:hash:base64:7].[ext]",
+							outputPath: process.env.NODE_ENV !== "production" ? "images/" : "assets/",
+							publicPath: process.env.NODE_ENV !== "production" ? "images/" : "assets/",
+						},
+					},
+				],
+			},
+			{
+				test: /\.(woff|woff2|ttf|otf)$/,
+				use: [
+					{
+						loader: "file-loader",
+						options: {
+							name:
+								process.env.NODE_ENV !== "production"
+									? "[path][name].[ext]"
+									: "[sha512:hash:base64:7].[ext]",
+							outputPath: process.env.NODE_ENV !== "production" ? "fonts/" : "assets/",
+							publicPath: process.env.NODE_ENV !== "production" ? "fonts/" : "assets/",
+						},
+					},
+				],
+			},
+			{
+				test: /\.(sa|sc|c)ss$/,
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							hmr: process.env.NODE_ENV === "development",
+							// reloadAll: true
+						},
+					},
+					{
+						loader: "css-loader",
+						options: {
+							sourceMap: true,
+						},
+					},
+					{
+						loader: "postcss-loader",
+						options: {
+							sourceMap: true,
+						},
+					},
+					{
+						loader: "sass-loader",
+						options: {
+							sourceMap: true,
+						},
+					},
+				],
+			},
+			{
 				test: /\.js[x]?$/i,
-				exclude: Path.resolve(__dirname, "node_modules"),
-				include: Path.resolve(__dirname, "../src"),
+				exclude: path.resolve(__dirname, "node_modules"),
+				include: path.resolve(__dirname, "../src"),
 				enforce: "pre",
 				use: [
 					{
@@ -39,41 +114,54 @@ module.exports = {
 					},
 				],
 			},
-			{
-				test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mov|mp4|mp3)(\?.*)?$/i,
-				use: {
-					loader: "file-loader",
-					options: {
-						name:
-							process.env.NODE_ENV == "development"
-								? "[path][name].[ext]"
-								: "assets/[sha512:hash:base64:7].[ext]",
-						publicPath: "../",
-					},
-				},
-			},
 		],
 	},
 
 	resolve: {
-		extensions: [".css", ".scss", ".js", ".jsx"],
 		alias: {
-			Src: Path.resolve(__dirname, "../src"),
+			Src: path.resolve(__dirname, "../src"),
 		},
 	},
 
 	plugins: [
-		new HtmlWebpackImportStaticPages({
-			chunkAssign: {
-				index: ["app"],
+		new CleanWebpackPlugin(),
+
+		...[
+			{
+				page: "index",
+				chunks: ["base"],
 			},
+		].map(
+			(event) =>
+				new HtmlWebpackPlugin({
+					template: `./src/${event.page}.html`,
+					filename: `${event.page}.html`,
+					chunks: event.chunks,
+				})
+		),
+
+		new PreloadWebpackPlugin({
+			rel: "preload",
+			as(entry) {
+				if (/\.(woff|woff2|ttf|otf)$/.test(entry)) return "font";
+			},
+			fileWhitelist: [/\.(woff|woff2|ttf|otf)$/],
+			include: "allAssets",
 		}),
 
-		// new webpack.ProvidePlugin({
-		// 	$: "jquery",
-		// 	jQuery: "jquery",
-		// }),
+		new ScriptExtHtmlWebpackPlugin({
+			defaultAttribute: "defer",
+		}),
 
-		// new CopyWebpackPlugin([{ from: Path.resolve(__dirname, "../public"), to: "public" }]),
+		new MiniCssExtractPlugin({
+			filename: "webpack-bundle.css",
+			chunkFilename: "[id].css",
+		}),
+
+		new webpack.ProvidePlugin({
+			// 	$: "jquery",
+			// 	jquery: "jQuery",
+			// 	"window.$": "jquery",
+		}),
 	],
 };

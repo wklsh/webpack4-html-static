@@ -1,0 +1,27 @@
+// Target elements without href / alt props specified
+a:not([href]),
+img:not([alt]) {
+	color: red !important;
+	border: 1px solid red !important;
+}
+
+.clearfix::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+.test {
+	border: 1px solid red !important;
+	color: red !important;
+}
+
+.is {
+	&--dNone {
+		display: none !important;
+	}
+
+	&--hidden {
+		visibility: hidden !important;
+	}
+}

@@ -1,6 +1,6 @@
 /*
  * https://github.com/jtrost/Complete-CSS-Reset
- */
+*/
 
 /* Displays for HTML 5 */
 article,
@@ -159,11 +159,13 @@ video {
 	text-align: left;
 	text-decoration: none;
 	vertical-align: baseline;
+	z-index: 1;
 }
 
 /* Miscellaneous resets */
 body {
 	line-height: 1;
+	font: inherit;
 }
 
 ol,

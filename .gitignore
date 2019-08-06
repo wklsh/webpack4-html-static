@@ -1,14 +1,5 @@
-# dependencies
-node_modules
-
-# production
-build
-
-# misc
+/node_modules
+/dist
+/.vscode
+/haters
 .DS_Store
-
-npm-debug.log
-yarn-error.log
-yarn.lock
-.yarnclean
-.vscode

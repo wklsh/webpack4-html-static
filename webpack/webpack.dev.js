@@ -1,66 +1,32 @@
-const Path = require("path");
-const Webpack = require("webpack");
+const path = require("path");
 const merge = require("webpack-merge");
 const common = require("./webpack.common.js");
+const portFinderSync = require("portfinder-sync");
 
 module.exports = merge(common, {
 	mode: "development",
 
-	output: {
-		path: Path.resolve(__dirname, "dist"),
-		filename: "js/[name].js",
-	},
-
 	devServer: {
 		host: "0.0.0.0",
-		port: "8080",
+		port: portFinderSync.getPort(8080),
 		historyApiFallback: true,
 		inline: true,
 		progress: true,
 		compress: true,
 		quiet: true,
-		contentBase: Path.join(__dirname, "../src"),
+		contentBase: path.join(__dirname, "../src"),
 		watchContentBase: true,
 		hot: true,
 		headers: {
 			"Access-Control-Allow-Origin": "*",
 		},
+		after: function(app, server) {
+			console.log("\n\n\n-------------------------------");
+			console.log("devServer running on:");
+			console.log(`http://${server.options.host}:${server.options.port}`);
+			console.log("-------------------------------\n");
+		},
 	},
 
-	devtool: "cheap-eval-source-map",
-
-	module: {
-		rules: [
-			{
-				test: /\.(css|scss)$/i,
-				use: [
-					{
-						loader: "style-loader",
-						options: {
-							sourceMap: true,
-						},
-					},
-					{
-						loader: "css-loader",
-						options: {
-							url: true,
-							sourceMap: true,
-						},
-					},
-					{
-						loader: "postcss-loader",
-						options: {
-							sourceMap: true,
-						},
-					},
-					{
-						loader: "sass-loader",
-						options: {
-							sourceMap: true,
-						},
-					},
-				],
-			},
-		],
-	},
+	devtool: "inline-source-map",
 });

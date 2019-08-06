@@ -1,16 +1,14 @@
+const purgecss = require('@fullhuman/postcss-purgecss');
+
 module.exports = {
-	plugins: {
-		"postcss-flexbugs-fixes": {},
-
-		"css-mqpacker": {},
-
-		autoprefixer: {
-			grid: true,
-			browsers: [">1%"]
-		},
-		cssnano: {
-			zindex: false,
-			reduceIdents: false
-		}
-	}
-};
+  plugins: [
+    require('autoprefixer'),
+    require('cssnano')({
+        preset: 'default',
+    }),
+    purgecss({
+      content: ['./**/*.html'],
+      keyframes: true
+    })
+  ]
+}
