@@ -6,13 +6,13 @@ const TerserPlugin = require("terser-webpack-plugin");
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
 const imageminMozjpeg = require("imagemin-mozjpeg");
 
-const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const OfflinePlugin = require("offline-plugin");
 
 module.exports = merge(common, {
 	mode: "production",
-	devtool: "source-map",
+
+	devtool: "none",
 
 	output: {
 		path: path.resolve(__dirname, "../dist"),
@@ -25,7 +25,6 @@ module.exports = merge(common, {
 			new TerserPlugin({
 				test: /\.js(\?.*)?$/i,
 				parallel: true,
-				sourceMap: true,
 			}),
 
 			new OptimizeCSSAssetsPlugin(),
@@ -50,8 +49,6 @@ module.exports = merge(common, {
 				}),
 			],
 		}),
-
-		new FaviconsWebpackPlugin("./src/favicon.svg"),
 
 		new OfflinePlugin(),
 	],
