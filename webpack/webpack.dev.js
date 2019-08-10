@@ -13,18 +13,12 @@ module.exports = merge(common, {
 		inline: true,
 		progress: true,
 		compress: true,
-		quiet: true,
 		contentBase: path.join(__dirname, "../src"),
 		watchContentBase: true,
 		hot: true,
+		open: true,
 		headers: {
 			"Access-Control-Allow-Origin": "*",
-		},
-		after: function(app, server) {
-			console.log("\n\n\n-------------------------------");
-			console.log("devServer running on:");
-			console.log(`http://${server.options.host}:${server.options.port}`);
-			console.log("-------------------------------\n");
 		},
 	},
 

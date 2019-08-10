@@ -4,7 +4,7 @@
 	"description": "Static HTML webpack 4 boilerplae",
 	"private": true,
 	"scripts": {
-		"start": "NODE_ENV=development webpack-dev-server --mode development --config webpack/webpack.dev.js --open",
+		"start": "NODE_ENV=development webpack-dev-server --mode development --config webpack/webpack.dev.js",
 		"build": "NODE_ENV=production webpack --mode production --config webpack/webpack.prod.js"
 	},
 	"repository": {

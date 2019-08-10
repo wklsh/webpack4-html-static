@@ -1,1 +1,3 @@
-console.log("landing");
+import "../index.js";
+
+console.log("Landing.js");

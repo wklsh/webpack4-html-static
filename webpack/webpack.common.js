@@ -7,14 +7,12 @@ const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const PreloadWebpackPlugin = require("preload-webpack-plugin");
 
 module.exports = {
-	mode: "development",
-
 	entry: {
-		base: "./src/index.js",
+		landing: "./src/js/landing/landing.js",
 	},
 
 	output: {
-		filename: "js/bundle.js",
+		filename: "js/[name].js",
 		path: path.resolve(__dirname, "../dist"),
 	},
 
@@ -45,8 +43,14 @@ module.exports = {
 								process.env.NODE_ENV !== "production"
 									? "[path][name].[ext]"
 									: "[sha512:hash:base64:7].[ext]",
-							outputPath: process.env.NODE_ENV !== "production" ? "images/" : "assets/",
-							publicPath: process.env.NODE_ENV !== "production" ? "images/" : "assets/",
+							outputPath:
+								process.env.NODE_ENV !== "production"
+									? "images/"
+									: "assets/",
+							publicPath:
+								process.env.NODE_ENV !== "production"
+									? "images/"
+									: "assets/",
 						},
 					},
 				],
@@ -61,8 +65,14 @@ module.exports = {
 								process.env.NODE_ENV !== "production"
 									? "[path][name].[ext]"
 									: "[sha512:hash:base64:7].[ext]",
-							outputPath: process.env.NODE_ENV !== "production" ? "fonts/" : "assets/",
-							publicPath: process.env.NODE_ENV !== "production" ? "fonts/" : "assets/",
+							outputPath:
+								process.env.NODE_ENV !== "production"
+									? "fonts/"
+									: "assets/",
+							publicPath:
+								process.env.NODE_ENV !== "production"
+									? "fonts/"
+									: "assets/",
 						},
 					},
 				],
@@ -97,20 +107,19 @@ module.exports = {
 					},
 				],
 			},
+
 			{
 				test: /\.js[x]?$/i,
 				exclude: path.resolve(__dirname, "node_modules"),
-				include: path.resolve(__dirname, "../src"),
-				enforce: "pre",
 				use: [
+					{
+						loader: "babel-loader",
+					},
 					{
 						loader: "eslint-loader",
 						options: {
 							emitWarning: true,
 						},
-					},
-					{
-						loader: "babel-loader",
 					},
 				],
 			},
@@ -129,7 +138,7 @@ module.exports = {
 		...[
 			{
 				page: "index",
-				chunks: ["base"],
+				chunks: ["landing"],
 			},
 		].map(
 			(event) =>
