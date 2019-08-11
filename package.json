@@ -49,11 +49,10 @@
 		"webpack-cli": "^3.3.6",
 		"webpack-dev-server": "^3.7.2",
 		"webpack-merge": "^4.2.1"
+		"eslint": "^6.1.0",
 	},
 	"dependencies": {
-		"eslint": "^6.1.0",
 		"jquery": "^3.4.1",
-		"lazysizes": "^4.1.8",
 		"offline-plugin": "^5.0.7"
 	}
 }
