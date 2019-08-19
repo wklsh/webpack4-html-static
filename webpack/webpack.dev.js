@@ -22,5 +22,9 @@ module.exports = merge(common, {
 		},
 	},
 
+	optimization: {
+		namedModules: true,
+	},
+
 	devtool: "inline-source-map",
 });
