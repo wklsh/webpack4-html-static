@@ -8,7 +8,7 @@
 		"jest": true,
 		"node": true
 	},
-	"extends": "airbnb-base",
+	"extends": "airbnb",
 	"parserOptions": {
 		"ecmaVersion": 6,
 		"sourceType": "module",
@@ -189,6 +189,6 @@
 		"flowtype/require-valid-file-annotation": "warn",
 		"flowtype/use-flow-type": "warn",
 		// https://www.npmjs.com/package/eslint-config-airbnb-base
-		"eol-last": ["error", "never"]
+		"eol-last": "off"
 	}
 }
