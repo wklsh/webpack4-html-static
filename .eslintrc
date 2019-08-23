@@ -189,6 +189,8 @@
 		"flowtype/require-valid-file-annotation": "warn",
 		"flowtype/use-flow-type": "warn",
 		// https://www.npmjs.com/package/eslint-config-airbnb-base
-		"eol-last": "off"
+		"eol-last": "off",
+		"indent": [2, "tab"],
+		"no-tabs": "off"
 	}
 }
