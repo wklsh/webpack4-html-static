@@ -1,4 +1,4 @@
-const purgecss = require('@fullhuman/postcss-purgecss');
+// const purgecss = require('@fullhuman/postcss-purgecss');
 
 module.exports = {
   plugins: [
@@ -6,9 +6,9 @@ module.exports = {
     require('cssnano')({
         preset: 'default',
     }),
-    purgecss({
-      content: ['./**/*.html'],
-      keyframes: true
-    })
+//     purgecss({
+//       content: ['./**/*.html'],
+//       keyframes: true
+//     })
   ]
 }
