@@ -164,7 +164,7 @@ module.exports = {
 		}),
 
 		new MiniCssExtractPlugin({
-			filename: "webpack-bundle.css",
+			filename: "style.css",
 			chunkFilename: "[id].css",
 		}),
 
