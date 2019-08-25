@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const PreloadWebpackPlugin = require("preload-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
 	entry: {
@@ -173,5 +174,13 @@ module.exports = {
 			// 	jquery: "jQuery",
 			// 	"window.$": "jquery",
 		}),
+		
+		new CopyWebpackPlugin([
+			// { from: "./src/index.php", to: "index.php" },
+			// { from: "./src/meta.json", to: "meta.json" },
+			// { from: "./src/seo.php", to: "seo.php" },
+			// { from: "./src/.htaccess", to: ".htaccess", toType: "file" },
+			// { from: "./src/robots.txt", to: "robots.txt" },
+		]),
 	],
 };
