@@ -91,19 +91,19 @@ module.exports = {
 					{
 						loader: "css-loader",
 						options: {
-							sourceMap: true,
+							sourceMap: process.env.NODE_ENV !== "production",
 						},
 					},
 					{
 						loader: "postcss-loader",
 						options: {
-							sourceMap: true,
+							sourceMap: process.env.NODE_ENV !== "production",
 						},
 					},
 					{
 						loader: "sass-loader",
 						options: {
-							sourceMap: true,
+							sourceMap: process.env.NODE_ENV !== "production",
 						},
 					},
 				],
