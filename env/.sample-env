@@ -1,9 +1,10 @@
 {
 	"NODE_ENV": "staging",
-	"webpack": "../webpack.staging.config.js",
+	"webpack": "../webpack/wepack.dev.js",
 	"output": "staging",
-	"siteURL": "",
-	"assetsURL": "",
+	"url": "https://this-is-your-website-url",
+	"baseURL": "/",
+	"assetURL": "https://this-is-your-website-url",
 	"endpointURL": "",
 	"robotsMeta": "noindex",
 
@@ -11,6 +12,10 @@
 	"s3Bucket": "",
 	"s3AccessKey": "",
 	"s3SecretKey": "",
+
+	"cloudfrontDistribution": "",
+	"cloudfrontAccessKey": "",
+	"cloudfrontSecretKey": "",
 
 	"ftpHost": "",
 	"ftpUser": "",

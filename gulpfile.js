@@ -1,82 +1,79 @@
-const //general packing
-	gulp = require("gulp"),
-	env = require("gulp-env"),
-	runSequence = require("run-sequence"),
-	webpack = require("webpack"),
-	webpackStream = require("webpack-stream"),
-	htmlmin = require("gulp-htmlmin"),
-	replace = require("gulp-replace"),
-	awspublish = require("gulp-awspublish"),
-	ftp = require("vinyl-ftp");
-//////////////////////////////////////////////////////////////////////////////////////////
-let publisher;
+const gulp = require("gulp");
+const env = require("gulp-env");
+const del = require("del");
+const runSequence = require("run-sequence");
+const webpack = require("webpack");
+const webpackStream = require("webpack-stream");
+const awspublish = require("gulp-awspublish");
+const ftp = require("vinyl-ftp");
+const cloudfront = require("gulp-cloudfront-invalidate");
+
 let loadEnv = (environment) => {
 	env({
-		file: environment + ".env",
-		type: ".json"
+		file: "./env/" + environment + ".env",
+		type: ".json",
 	});
-
-	// publisher = awspublish.create({
-	// 	region: process.env.s3Region,
-	// 	params: {
-	// 		Bucket: process.env.s3Bucket
-	// 	},
-	// 	accessKeyId: process.env.s3AccessKey,
-	// 	secretAccessKey: process.env.s3SecretKey
-	// });
 };
-// //////////////////////////////////////////////////////////////////////////////////////////
-// //generate staging build
+
+// generate staging build
 gulp.task("build-staging", (callback) => {
 	loadEnv("staging");
 	runSequence(
+		"cleanup",
 		"webpack",
-		//'webpack-replace',
-		"minify",
-		["ftp-publish"],
+		["s3-publish"],
+		"cloudfront-invalidate",
 		callback
 	);
 });
 
+// generate production build
 gulp.task("build-production", (callback) => {
 	loadEnv("production");
 	runSequence(
+		"cleanup",
 		"webpack",
-		//'webpack-replace',
-		"minify",
-		["ftp-publish"],
+		["s3-publish"],
+		"cloudfront-invalidate",
 		callback
 	);
 });
-//////////////////////////////////////////////////////////////////////////////////////////
+
+gulp.task("cleanup", () => {
+	return del([process.env.output + "/**/*"]);
+});
+
 gulp.task("webpack", () => {
 	return gulp
-		.src("./src/app/index.js")
+		.src("../src/js/index.js")
 		.pipe(webpackStream(require(process.env.webpack), webpack))
 		.pipe(gulp.dest("./" + process.env.output));
 });
 
-gulp.task("minify", () => {
-	gulp
-		.src("./" + process.env.output + "/index.html")
-		.pipe(htmlmin({ collapseWhitespace: true }))
-		.pipe(gulp.dest("./" + process.env.output));
-});
-
-//////////////////////////////////////////////////////////////////////////////////////////
-gulp.task("ftp-publish", () => {
-	let conn = ftp.create({
-		host: process.env.ftpHost,
-		user: process.env.ftpUser,
-		password: process.env.ftpPassword,
-		parallel: process.env.ftpParallel
+gulp.task("s3-publish", () => {
+	let publisher = awspublish.create({
+		region: process.env.s3Region,
+		params: {
+			Bucket: process.env.s3Bucket,
+		},
+		accessKeyId: process.env.s3AccessKey,
+		secretAccessKey: process.env.s3SecretKey,
 	});
 
-	gulp
-		.src(process.env.output + "/**/*", {
-			base: process.env.output,
-			buffer: false
-		})
-		.pipe(conn.newer("/"))
-		.pipe(conn.dest("/"));
+	gulp.src("./" + process.env.output + "/**/*")
+		.pipe(publisher.publish())
+		.pipe(publisher.sync("", [/^4xx/, /^5xx/]))
+		.pipe(awspublish.reporter());
+});
+
+gulp.task("cloudfront-invalidate", () => {
+	let cfSettings = {
+		distribution: process.env.cloudfrontDistribution,
+		accessKeyId: process.env.cloudfrontAccessKey,
+		secretAccessKey: process.env.cloudfrontSecretKey,
+		paths: ["/*"],
+	};
+	return gulp
+		.src("./" + process.env.output + "/**/*")
+		.pipe(cloudfront(cfSettings));
 });
