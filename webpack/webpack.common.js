@@ -169,7 +169,7 @@ module.exports = {
 			chunkFilename:
 				process.env.NODE_ENV !== "production"
 					? "[id].css"
-					: "[hash].css",
+					: "[id]].[chunkhash:8].css",
 		}),
 
 		new webpack.ProvidePlugin({
