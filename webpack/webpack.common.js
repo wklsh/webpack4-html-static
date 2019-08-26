@@ -166,7 +166,10 @@ module.exports = {
 
 		new MiniCssExtractPlugin({
 			filename: "style.css",
-			chunkFilename: "[id].css",
+			chunkFilename:
+				process.env.NODE_ENV !== "production"
+					? "[id].css"
+					: "[hash].css",
 		}),
 
 		new webpack.ProvidePlugin({
