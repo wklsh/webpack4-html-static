@@ -9,19 +9,19 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
 	entry: {
-		landing: "./src/js/landing/landing.js",
+		landing: "./src/js/landing/landing.js"
 	},
 
 	output: {
 		filename: "js/[name].js",
-		path: path.resolve(__dirname, "../dist"),
+		path: path.resolve(__dirname, "../dist")
 	},
 
 	module: {
 		rules: [
 			{
 				test: /\.txt$/,
-				use: "raw-loader",
+				use: "raw-loader"
 			},
 			{
 				test: /\.html$/,
@@ -29,10 +29,10 @@ module.exports = {
 					{
 						loader: "html-loader",
 						options: {
-							minimize: true,
-						},
-					},
-				],
+							minimize: true
+						}
+					}
+				]
 			},
 			{
 				test: /\.(jpe?g|png|gif|svg)$/,
@@ -51,10 +51,10 @@ module.exports = {
 							publicPath:
 								process.env.NODE_ENV !== "production"
 									? "images/"
-									: "assets/",
-						},
-					},
-				],
+									: "assets/"
+						}
+					}
+				]
 			},
 			{
 				test: /\.(woff|woff2|ttf|otf)$/,
@@ -73,10 +73,10 @@ module.exports = {
 							publicPath:
 								process.env.NODE_ENV !== "production"
 									? "fonts/"
-									: "assets/",
-						},
-					},
-				],
+									: "assets/"
+						}
+					}
+				]
 			},
 			{
 				test: /\.(sa|sc|c)ss$/,
@@ -84,29 +84,29 @@ module.exports = {
 					{
 						loader: MiniCssExtractPlugin.loader,
 						options: {
-							hmr: process.env.NODE_ENV === "development",
+							hmr: process.env.NODE_ENV === "development"
 							// reloadAll: true
-						},
+						}
 					},
 					{
 						loader: "css-loader",
 						options: {
-							sourceMap: process.env.NODE_ENV !== "production",
-						},
+							sourceMap: process.env.NODE_ENV !== "production"
+						}
 					},
 					{
 						loader: "postcss-loader",
 						options: {
-							sourceMap: process.env.NODE_ENV !== "production",
-						},
+							sourceMap: process.env.NODE_ENV !== "production"
+						}
 					},
 					{
 						loader: "sass-loader",
 						options: {
-							sourceMap: process.env.NODE_ENV !== "production",
-						},
-					},
-				],
+							sourceMap: process.env.NODE_ENV !== "production"
+						}
+					}
+				]
 			},
 
 			{
@@ -114,24 +114,25 @@ module.exports = {
 				exclude: path.resolve(__dirname, "node_modules"),
 				use: [
 					{
-						loader: "babel-loader",
+						loader: "babel-loader"
 					},
 					{
 						loader: "eslint-loader",
 						options: {
-							emitWarning: true,
-						},
-					},
-				],
-			},
-		],
+							emitWarning: true
+						}
+					}
+				]
+			}
+		]
 	},
 
 	resolve: {
 		extensions: [".js", ".scss", ".css"],
 		alias: {
 			Src: path.resolve(__dirname, "../src"),
-		},
+			Styles: path.resolve(__dirname, "../src/styles")
+		}
 	},
 
 	plugins: [
@@ -140,14 +141,14 @@ module.exports = {
 		...[
 			{
 				page: "index",
-				chunks: ["landing"],
-			},
+				chunks: ["landing"]
+			}
 		].map(
-			(event) =>
+			event =>
 				new HtmlWebpackPlugin({
 					template: `./src/${event.page}.html`,
 					filename: `${event.page}.html`,
-					chunks: event.chunks,
+					chunks: event.chunks
 				})
 		),
 
@@ -157,11 +158,11 @@ module.exports = {
 				if (/\.(woff|woff2|ttf|otf)$/.test(entry)) return "font";
 			},
 			fileWhitelist: [/\.(woff|woff2|ttf|otf)$/],
-			include: "allAssets",
+			include: "allAssets"
 		}),
 
 		new ScriptExtHtmlWebpackPlugin({
-			defaultAttribute: "defer",
+			defaultAttribute: "defer"
 		}),
 
 		new MiniCssExtractPlugin({
@@ -169,7 +170,7 @@ module.exports = {
 			chunkFilename:
 				process.env.NODE_ENV !== "production"
 					? "[id].css"
-					: "[id]].[chunkhash:8].css",
+					: "[id]].[chunkhash:8].css"
 		}),
 
 		new webpack.ProvidePlugin({
@@ -177,13 +178,13 @@ module.exports = {
 			// 	jquery: "jQuery",
 			// 	"window.$": "jquery",
 		}),
-		
+
 		new CopyWebpackPlugin([
 			// { from: "./src/index.php", to: "index.php" },
 			// { from: "./src/meta.json", to: "meta.json" },
 			// { from: "./src/seo.php", to: "seo.php" },
 			// { from: "./src/.htaccess", to: ".htaccess", toType: "file" },
 			// { from: "./src/robots.txt", to: "robots.txt" },
-		]),
-	],
+		])
+	]
 };
