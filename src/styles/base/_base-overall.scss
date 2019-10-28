@@ -1,3 +1,8 @@
+// Overwrite selection style to only highlight text
+::selection {
+	color: #3297fd;
+}
+
 * {
 	box-sizing: border-box;
 }
