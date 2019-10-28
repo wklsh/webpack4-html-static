@@ -1,17 +1,9 @@
 {
-	"useTabs": true,
-	"tabWidth": 4,
-	"printWidth": 80,
-	"singleQuote": false,
-	"jsxBracketSameLine": false,
-	"noSemi": true,
-	"overrides": [
-		{
-			"files": "*.scss",
-			"options": {
-				"useTabs": false,
-				"tabWidth": 2
-			}
-		}
-	]
+  "useTabs": false,
+  "tabWidth": 2,
+  "printWidth": 100,
+  "singleQuote": true,
+  "jsxBracketSameLine": false,
+  "noSemi": true,
+  "trailingComma": "es5"
 }
