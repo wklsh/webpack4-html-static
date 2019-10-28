@@ -1,3 +1,19 @@
+@keyframes testBorder {
+	0%,
+	100% {
+		border-color: #ff0000;
+	}
+	25% {
+		border-color: #d7ff00;
+	}
+	50% {
+		border-color: #3300ff;
+	}
+	75% {
+		border-color: #dc00ff;
+	}
+}
+
 // Target elements without href / alt props specified
 a:not([href]),
 img:not([alt]) {
@@ -12,7 +28,10 @@ img:not([alt]) {
 }
 
 .test {
-	border: 1px solid red !important;
+	border: 1px solid red;
+	animation-name: testBorder;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
 	color: red !important;
 }
 
