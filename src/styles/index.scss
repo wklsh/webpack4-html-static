@@ -1,7 +1,7 @@
 //! utils - order matters - This has to be at the top
+@import "utils/_variables.scss";
 @import "utils/_helpers.scss";
 @import "utils/_mixins.scss";
-@import "utils/_variables.scss";
 
 //! base
 @import "base/_reset.scss";
