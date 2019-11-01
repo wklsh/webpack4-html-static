@@ -2,6 +2,7 @@ const path = require("path");
 const merge = require("webpack-merge");
 const common = require("./webpack.common.js");
 
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
 const imageminMozjpeg = require("imagemin-mozjpeg");
@@ -16,7 +17,7 @@ module.exports = merge(common, {
 	devtool: "none",
 
 	output: {
-		path: path.resolve(__dirname, "../dist"),
+		path: path.resolve(__dirname, "../build/dist"),
 		filename: "js/[chunkhash:8].js",
 	},
 
@@ -35,6 +36,10 @@ module.exports = merge(common, {
 	},
 
 	plugins: [
+		new CleanWebpackPlugin({
+			path: path.resolve(__dirname, "../build/dist"),
+		}),
+
 		new ImageminPlugin({
 			test: /\.(jpe?g|png|gif|svg)$/i,
 			gifsicle: {
@@ -53,9 +58,9 @@ module.exports = merge(common, {
 			],
 		}),
 
-    //  new OfflinePlugin(),
-    
-    new FaviconsWebpackPlugin({
+		//  new OfflinePlugin(),
+
+		new FaviconsWebpackPlugin({
 			logo: "./src/favicon.png",
 			prefix: "favicons/",
 		}),
