@@ -5,6 +5,7 @@ const common = require("./webpack.common.js");
 const TerserPlugin = require("terser-webpack-plugin");
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
 const imageminMozjpeg = require("imagemin-mozjpeg");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const OfflinePlugin = require("offline-plugin");
@@ -52,6 +53,11 @@ module.exports = merge(common, {
 			],
 		}),
 
-		new OfflinePlugin(),
+    //  new OfflinePlugin(),
+    
+    new FaviconsWebpackPlugin({
+			logo: "./src/favicon.svg",
+			prefix: "favicons/",
+		}),
 	],
 });
