@@ -25,9 +25,11 @@ module.exports = {
 				test: /\.html$/,
 				use: [
 					{
-						loader: "html-loader",
+						// loader: "html-loader",
+						loader: "html-srcsets-loader", // Alternate workaround for srcSet not receiving interpolates
 						options: {
 							minimize: true,
+							attrs: ["img:src", ":srcset"],
 						},
 					},
 				],
