@@ -56,7 +56,7 @@ module.exports = merge(common, {
     //  new OfflinePlugin(),
     
     new FaviconsWebpackPlugin({
-			logo: "./src/favicon.svg",
+			logo: "./src/favicon.png",
 			prefix: "favicons/",
 		}),
 	],
