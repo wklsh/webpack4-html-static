@@ -12,6 +12,11 @@ npm run start
 npm run build
 ```
 
+## Deploy Staging Build to S3
+```javascript
+npm run deploy-staging
+```
+
 ## Deploy Production Build to S3
 ```javascript
 npm run deploy-production
@@ -31,4 +36,4 @@ npm run deploy-production
 
 `webpack.prod.js` - Merges with `webpack.common.js`, contains **production** environment configuration
 
-`webpack.deploy-production.js` - Merges with `webpack.prod.js`, contains only **deployment** configuration
+`webpack.deploy-production.js` - Merges with `webpack.prod.js`, contains only **deployment**(both staging & production) configuration

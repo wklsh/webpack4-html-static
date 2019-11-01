@@ -41,11 +41,17 @@ module.exports = {
 						loader: "file-loader",
 						options: {
 							name:
-								process.env.NODE_ENV !== "production"
+								process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "staging"
 									? "[path][name].[ext]"
 									: "[sha512:hash:base64:7].[ext]",
-							outputPath: process.env.NODE_ENV !== "production" ? "images/" : "assets/",
-							publicPath: process.env.NODE_ENV !== "production" ? "images/" : "assets/",
+							outputPath:
+								process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "staging"
+									? "images/"
+									: "assets/",
+							publicPath:
+								process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "staging"
+									? "images/"
+									: "assets/",
 						},
 					},
 				],
@@ -57,11 +63,17 @@ module.exports = {
 						loader: "file-loader",
 						options: {
 							name:
-								process.env.NODE_ENV !== "production"
+								process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "staging"
 									? "[path][name].[ext]"
 									: "[sha512:hash:base64:7].[ext]",
-							outputPath: process.env.NODE_ENV !== "production" ? "fonts/" : "assets/",
-							publicPath: process.env.NODE_ENV !== "production" ? "fonts/" : "assets/",
+							outputPath:
+								process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "staging"
+									? "fonts/"
+									: "assets/",
+							publicPath:
+								process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "staging"
+									? "fonts/"
+									: "assets/",
 						},
 					},
 				],
@@ -79,19 +91,22 @@ module.exports = {
 					{
 						loader: "css-loader",
 						options: {
-							sourceMap: process.env.NODE_ENV !== "production",
+							sourceMap:
+								process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "staging",
 						},
 					},
 					{
 						loader: "postcss-loader",
 						options: {
-							sourceMap: process.env.NODE_ENV !== "production",
+							sourceMap:
+								process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "staging",
 						},
 					},
 					{
 						loader: "sass-loader",
 						options: {
-							sourceMap: process.env.NODE_ENV !== "production",
+							sourceMap:
+								process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "staging",
 						},
 					},
 				],
@@ -154,7 +169,10 @@ module.exports = {
 
 		new MiniCssExtractPlugin({
 			filename: "style.css",
-			chunkFilename: process.env.NODE_ENV !== "production" ? "[id].css" : "[id]].[chunkhash:8].css",
+			chunkFilename:
+				process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "staging"
+					? "[id].css"
+					: "[id]].[chunkhash:8].css",
 		}),
 
 		new webpack.ProvidePlugin({
