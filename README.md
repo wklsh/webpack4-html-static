@@ -36,4 +36,4 @@ npm run deploy-production
 
 `webpack.prod.js` - Merges with `webpack.common.js`, contains **production** environment configuration
 
-`webpack.deploy-production.js` - Merges with `webpack.prod.js`, contains only **deployment**(both staging & production) configuration
+`webpack.deploy.js` - Merges with `webpack.prod.js`, contains only **deployment**(both staging & production) configuration
