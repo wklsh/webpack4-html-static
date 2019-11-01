@@ -35,6 +35,11 @@ img:not([alt]) {
 	color: red !important;
 }
 
+.buttonEffect:active {
+	transform: translateY(1px);
+	transition-duration: 0.1s;
+}
+
 .is {
 	&--dNone {
 		display: none !important;
